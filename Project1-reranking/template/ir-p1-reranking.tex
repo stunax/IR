@@ -1,0 +1,59 @@
+% This is "sig-alternate.tex" V2.0 May 2012
+% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
+%
+% This example file demonstrates the use of the 'sig-alternate.cls'
+% V2.5 LaTeX2e document class file. 
+
+\documentclass{sig-alternate}
+\usepackage{color}
+\usepackage[colorlinks,citecolor=blue]{hyperref}
+
+\begin{document}
+
+\conferenceinfo{Information Retrieval}{2016 DIKU, Denmark}
+\title{Result re-ranking}
+\numberofauthors{1} 
+\author{
+\alignauthor 
+Your name
+}
+\maketitle
+
+\begin{abstract}
+Write your abstract here. Your abstract should \emph{concisely} say (i) \emph{why} the topic is interesting, (ii) \emph{what} you do in your study, (iii) \emph{how} you did your study and (iv) \emph{what} the results were
+\end{abstract}
+
+\section{Introduction}
+Write your introduction here. Get inspiration on how to structure and formulate an introduction from the studies you review. Make sure you describe what document re-ranking is and why it is useful.
+
+Several studies on document re-ranking have been published before and after \cite{woo2010achieving}. In your introduction, give an overview of \textbf{\emph{at least three}} studies of re-ranking documents published by the ACM between 2003 and 2016. You may find these studies by searching e.g.\ the ACM digital library (\url{http://dl.acm.org}) or Google Scholar. Your literature review of the $3+$ papers must (i) describe the method proposed in the paper, how the method was evaluated and what the results were. Furthermore, it should be clear how each paper differ from the other paper you review. \textbf{Remember: the literature review is meant to help the reader understand where there is a gap in the existing research that you can fill}. Therefore, select papers that are as close as possible to \cite{woo2010achieving}.
+
+You \emph{must} cite your sources when/if you use a specific phrasing. Failure to do so will be considered plagiarism.
+
+\section{Data sets \& Queries}
+List in a table, for each data set, the following characteristics:
+\begin{enumerate}
+\item Name
+\item Number of documents
+\item Average document length
+\item Minimum document length
+\item Maximum document length
+\end{enumerate}
+
+Furthermore, list the number of queries and the average query length for the superset of the queries.
+
+\section{Experimental setup}
+Describe your experimental setup. Do this similarly to how you did in your original projects.
+
+\section{Experiments}
+For indexing, retrieval and evaluation use \textsc{Indri} and use \textsc{trec\_eval}. Index the data sets using the Krovetz stemmer and stop word removal using the list \url{http://ir.dcs.gla.ac.uk/resources/linguistic_utils/stop_words}
+
+Use the title field of the queries (preprocessing of the queries is required to extract the title) and retrieve the top-$k = 20,50$ documents using a query-likelihood language model with Dirichlet smoothing for baseline. Tune your retrieval by setting $\mu = \{1000,1500,2000,2500,3000\}$, and optimise for precision at 5 (P@5). Report this for each data set. Report the best P@5 you obtain. 
+
+Use both $R_1$ and $R_2$ for experiments and re-rank the documents of the initial baseline for both top-$k = 20,50$ documents as specified in \cite{woo2010achieving} using (i) $LM+R_1$, (ii) $LM+R_2$ and (iii) $LM+R_1+R_2$ and evaluate the results using mean reciprocal rank (MRR), precision at 1 (P@1), P@5 and normalised discounted cumulative gain at 5 (NDCG@5). What do you observe? Which heuristic or combination of heuristics performs the best? Present your results in a table similar to Table 1 in \cite{woo2010achieving}. If you have time, can you come up with a heuristic that performs better?
+
+\section{Conclusion}
+Write your conclusion here
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the 
+\end{document}
