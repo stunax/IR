@@ -27,20 +27,80 @@ With the growing amount of documents on the web, precise and fast searches becom
 
 Other studies\cite{woo2010achieving} have already shown this to be effective, and I want to further explore how this improves searches of on other data sets.
 
-The reason for doing this is, that high precision searches come at a high computational cost. So a simple and fast method is used to get the top results. the top rankings then get re-ranked based on two other models
+The reason for doing this is, that high precision searches come at a high computational cost. So a simple and fast method is used to get the top results. The top rankings then get re-ranked based on two other models, which we introduce later on. 
 
+The model we propose, is based on tf-idf. It determines rank based on the amount of occurrences of a term in a document, and thus provides a query a higher chance of getting ranked the highest. This very simple model has been effective in many other experiments. The tf-idf does however not consider how the document is build. For instance a query $x$ would rank two documents $a b x x c$ and $a x b x c$ the same. However the second document would have a higher chance of the document being about $x$, as the mentions of $x$ is spread out through the document, and not just mentioned several times in the same sentence, which could be the explanation in document one.
 
+The two models we need, needs to satisfy the following hypothesises:
+\begin{itemize}
+\item When terms of a query are ranked relatively higher for a document, there is a chance that the query is highly relevant for the document
+\item If terms of a query are ranked close to each other, they probably describe the contents of the document, which implies higher relevance.
+\end{itemize}
+\subsection{Other experiments that could influence my result}
 
+The great thing about this method is, that it works very well alongside other models. It is possible to combine this method with many other models. As an example you can look at the research found here\cite{review1} where they explore how to optimize the tf-idf part. These two papers explore how to tune the weights used when calculating tf-idf. Implementing this, you would increase the effectiveness of the first ranking, which could then be improved upon using our re-ranking method. 
 
+According to the articel\cite{review1} they gained about 10\% rank precision by addressing the problem, that most models use a static weights when calculating their ranks. These static weights are great for specific sized documents and such, but they grow more imprecise the longer the document is from the ideal document size. To handle this they implemented a weight scheme, where they have a weight that is great for short documents and a weight for long documents. They then combine these two weights based on the documents, so they get a more balanced weight regardless of document size.
 
+Another article\cite{review3} makes use of weighing terms differently depending on how the affect the query. They show that not every term in the query should be weighted the same. The example they use in the article is:\\
+Consider the following queries with the same term \textbf{effect}.
+\begin{itemize}
+\item How does Doppler ultrasound take advantage of the
+Doppler effect to create a moving image of the inside
+of the body?
+\item Effect of temperature on measurement of alkaline phosphatase
+activity
+\end{itemize}
+Effect is the core term when a human reader interprets the query, but the computer will usually weight it equally with all the others. 
 
+They have thus implemented a method to check if a term should be weighed higher or lower than the others. This have given them -1\% to 26\% better results, and according to them does not increase the computational cost alot, which indicates that this could could also be implemented side by side with our term placement re-ranking.
 
+\subsection{Another take at re-ranking}
+Another article\cite{review2} have taken another look at re-ranking and figured another way to use it. They have implemented a system where users can personally reconfigure the term weights of searches. This way they can themselves influence their own search results based on the current result. It is mostly and experimental system, but it can provide information about how users really want their searches weighed. 
 
+What they do is that they initially just pass the query and provides default answers. The user is then able to manually handle terms, so they get just the results they are looking for, without trying to redo the search.
 
+ \section{Data sets and queries}
+This article makes use of three publicly available data sets with documents, queries and qrels (optiman results for all queries). 
 
+For the documents data sets it looks like this:
+\begin{table}[h!]
+\centering
+\caption{document data sets}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Name           & laTimes & fbis   & ft     \\ \hline
+document count & 131896  & 130471 & 210158 \\ \hline
+average length & 502     & 504    & 399    \\ \hline
+minimum length & 2       & 12     & 11     \\ \hline
+maximum        & 24125   & 143175 & 26145  \\ \hline
+\end{tabular}
+\end{table}
 
+for the queries I use it looks like this:
 
+\begin{table}[h!]
+\centering
+\caption{queries data set}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+Name           & queries \\ \hline
+document count & 150     \\ \hline
+average length & 19.54   \\ \hline
+minimum length & 26      \\ \hline
+maximum        & 33      \\ \hline
+\end{tabular}
+\end{table}
 
+These are the data sets used for the experiments in this assignment.
+
+\section{experimental }
+In my experiment i tried to keep as close to the original method in \cite{woo2010achieving}.
+
+\section{experiments}
+I use the dirichlet smoothing as baseline. I tune it for different $\mu$
 
 %% old thingy
 \begin{abstract}
