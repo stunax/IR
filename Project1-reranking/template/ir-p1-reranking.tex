@@ -7,7 +7,7 @@
 \documentclass{sig-alternate}
 \usepackage{color}
 \usepackage[colorlinks,citecolor=blue]{hyperref}
-
+\usepackage[utf8]{inputenc}
 \begin{document}
 
 \conferenceinfo{Information Retrieval}{2016 DIKU, Denmark}
@@ -15,12 +15,12 @@
 \numberofauthors{1} 
 \author{
 \alignauthor 
-Anon? % dpj482 - Christian Edsberg Møllgaard
+ dpj482 - Christian Edsberg Møllgaard
 }
 \maketitle
 
 \begin{abstract}
-Many ranking models only make use of simple statistics to rank document. 
+In this paper we will peform reranking of search results based on an intra-document methodology. This methodology does not only take term frequency into account, but also tries to use the relative importance of terms in context to individual  documents. The methodology used is proposed by Woo et. al\cite{cummins2011improved}. Three datasets are used to evaluate the reranking against the original ranking. Here i find no evidence of an improvement and in most cases get worse results than before.
 \end{abstract}
 \section{Introduction}
 With the growing amount of documents on the web, precise and fast searches becomes even more important. In many traditional models, they make use of simple statistics to rank documents relevant to searches. I have tried to re-rank a traditional model to provide better precision.
@@ -67,7 +67,6 @@ For the documents data sets it looks like this:
 \begin{table}[h!]
 \centering
 \caption{document data sets}
-\label{my-label}
 \begin{tabular}{|l|l|l|l|}
 \hline
 Name           & laTimes & fbis   & ft     \\ \hline
@@ -83,24 +82,77 @@ for the queries I use it looks like this:
 \begin{table}[h!]
 \centering
 \caption{queries data set}
-\label{my-label}
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|l|l|}
 \hline
-Name           & queries \\ \hline
-document count & 150     \\ \hline
-average length & 19.54   \\ \hline
-minimum length & 26      \\ \hline
-maximum        & 33      \\ \hline
+ & query count & average length  \\ \hline
+queries & 150 & 19.54     \\ \hline
+%average length & 19.54   \\ 
 \end{tabular}
 \end{table}
 
 These are the data sets used for the experiments in this assignment.
 
-\section{experimental }
-In my experiment i tried to keep as close to the original method in \cite{woo2010achieving}.
+\section{experimental Setup}
+The experiment is carried out using various tools, where the most important are: Indri, Python 2.7, c++ and \\TREC\_EVAL. To replicate the experiments follow the guide in the appendix.
 
 \section{experiments}
-I use the dirichlet smoothing as baseline. I tune it for different $\mu$
+As a baseline for the experiment, LM with dirichlet smoothening was used. 20 or 50 documents are retrieved for each query, and to tune the dirichlet smoothening, $\mu$ is set to ${1000,1500,...,3000}$ to see when it peforms best for each dataset and query return count. The tuning is done using $P_5$, and the results are shown in table 3. The tuning of $\mu$ turned out to be identical for both query count 20 and 50. The best $\mu$ is reported in bold.
+
+\begin{table}[h!]
+\centering
+\caption{$P@5$ values used to tune the experiment}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ $\mu$ & 1000 & 1500 & 2000 & 2500 & 3000  \\ \hline
+LATIMES & 0.2907 & 0.2920 & 0.2960 & \textbf{0.2973} & 0.2947 \\ \hline
+FT & 0.3221 & \textbf{0.3248} & 0.3195 & 0.3221 & 0.3235  \\ \hline
+FBIS & 0.2581 & \textbf{0.2608} & 0.2554 & 0.2554 & 0.2486 \\  \hline
+%average length & 19.54   \\ 
+\end{tabular}
+\end{table}
+
+The next step is to calculate the two heuristics used in the reranking using the $\mu$ values calculated before. The heuristics called R1 and R2, are then used to rerank the querys. The result is then reported using TREC\_EVAL with in several different situations. These results are shown in table 4 for query count 20 and in table 5 for query count 50.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+name & type  & lm & +R1 & +R2 & +R1+R2 \\ \hline \hline
+la & P\_5 & 0.5137 & 0.4104 & 0.4372 & 0.4402 \\ \hline 
+la & MMR & 0.2947 & 0.2333 & 0.2427 & 0.2427 \\ \hline
+la & NDCG@5 & 0.3195 & 0.2414 & 0.2544 & 0.2547 \\ \hline \hline
+ft & P\_5 & 0.5422 & 0.4386 & 0.4198 & 0.4322 \\ \hline 
+ft & MMR & 0.3235 & 0.2483 & 0.2483 & 0.2564 \\ \hline
+ft & NDCG@5 & 0.3497 & 0.2657 & 0.2586 & 0.2672 \\ \hline \hline
+fbis & P\_5 & 0.4011 & 0.3374 & 0.3127 & 0.3307 \\ \hline 
+fbis & MMR & 0.2486 & 0.2095 & 0.2068 & 0.2108 \\ \hline
+fbis & NDCG@5 & 0.2664 & 0.2148 & 0.2085 & 0.2134 \\ \hline
+\end{tabular}
+\caption{Reranked results for count 20}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+name & type  & lm & +R1 & +R2 & +R1+R2 \\ \hline \hline
+la & P\_5 & 0.5143 & 0.3676 & 0.3872 & 0.4084 \\ \hline 
+la & MMR & 0.2947 & 0.1867 & 0.1893 & 0.1933 \\ \hline
+la & NDCG@5 & 0.3195 & 0.2014 & 0.2068 & 0.2153 \\ \hline \hline
+ft & P\_5 & 0.5430 & 0.4031 & 0.3935 & 0.3900 \\ \hline 
+ft & MMR & 0.3235 & 0.2255 & 0.2295 & 0.2255 \\ \hline
+ft & NDCG@5 & 0.3497 & 0.2396 & 0.2399 & 0.2349 \\ \hline \hline
+fbis & P\_5 & 0.4026 & 0.2810 & 0.2893 & 0.2906 \\ \hline 
+fbis & MMR & 0.2486 & 0.1730 & 0.1703 & 0.1716 \\ \hline
+fbis & NDCG@5 & 0.2664 & 0.1742 & 0.1765 & 0.1752 \\ \hline
+\end{tabular}
+\caption{Reranked results for count 50}
+\end{table}
+
+
+
+
+
 
 %% old thingy
 \begin{abstract}
