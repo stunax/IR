@@ -100,15 +100,15 @@ As a baseline for the experiment, LM with dirichlet smoothening was used. 20 or 
 
 \begin{table}[h!]
 \centering
-\caption{$P@5$ values used to tune the experiment}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
- $\mu$ & 1000 & 1500 & 2000 & 2500 & 3000  \\ \hline
+ $\mu$ & $\mu$1000 & $\mu$1500 & $\mu$2000 & $\mu$2500 & $\mu$3000  \\ \hline
 LATIMES & 0.2907 & 0.2920 & 0.2960 & \textbf{0.2973} & 0.2947 \\ \hline
 FT & 0.3221 & \textbf{0.3248} & 0.3195 & 0.3221 & 0.3235  \\ \hline
 FBIS & 0.2581 & \textbf{0.2608} & 0.2554 & 0.2554 & 0.2486 \\  \hline
 %average length & 19.54   \\ 
 \end{tabular}
+\caption{$P@5$ values used to tune the experiment}
 \end{table}
 
 The next step is to calculate the two heuristics used in the reranking using the $\mu$ values calculated before. The heuristics called R1 and R2, are then used to rerank the querys. The result is then reported using TREC\_EVAL with in several different situations. These results are shown in table 4 for query count 20 and in table 5 for query count 50.
@@ -118,15 +118,15 @@ The next step is to calculate the two heuristics used in the reranking using the
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 name & type  & lm & +R1 & +R2 & +R1+R2 \\ \hline \hline
-la & P\_5 & 0.5137 & 0.4104 & 0.4372 & 0.4402 \\ \hline 
-la & MMR & 0.2947 & 0.2333 & 0.2427 & 0.2427 \\ \hline
-la & NDCG@5 & 0.3195 & 0.2414 & 0.2544 & 0.2547 \\ \hline \hline
-ft & P\_5 & 0.5422 & 0.4386 & 0.4198 & 0.4322 \\ \hline 
-ft & MMR & 0.3235 & 0.2483 & 0.2483 & 0.2564 \\ \hline
-ft & NDCG@5 & 0.3497 & 0.2657 & 0.2586 & 0.2672 \\ \hline \hline
-fbis & P\_5 & 0.4011 & 0.3374 & 0.3127 & 0.3307 \\ \hline 
-fbis & MMR & 0.2486 & 0.2095 & 0.2068 & 0.2108 \\ \hline
-fbis & NDCG@5 & 0.2664 & 0.2148 & 0.2085 & 0.2134 \\ \hline
+la & P\_5 & \textbf{0.5137} & 0.4104 & 0.4372 & 0.4402 \\ \hline 
+la & MMR & \textbf{0.2947} & 0.2333 & 0.2427 & 0.2427 \\ \hline
+la & NDCG@5 & \textbf{0.3195} & 0.2414 & 0.2544 & 0.2547 \\ \hline \hline
+ft & P\_5 & \textbf{0.5422} & 0.4386 & 0.4198 & 0.4322 \\ \hline 
+ft & MMR & \textbf{0.3235} & 0.2483 & 0.2483 & 0.2564 \\ \hline
+ft & NDCG@5 & \textbf{0.3497} & 0.2657 & 0.2586 & 0.2672 \\ \hline \hline
+fbis & P\_5 & \textbf{0.4011} & 0.3374 & 0.3127 & 0.3307 \\ \hline 
+fbis & MMR & \textbf{0.2486} & 0.2095 & 0.2068 & 0.2108 \\ \hline
+fbis & NDCG@5 & \textbf{0.2664} & 0.2148 & 0.2085 & 0.2134 \\ \hline
 \end{tabular}
 \caption{Reranked results for count 20}
 \end{table}
@@ -136,60 +136,28 @@ fbis & NDCG@5 & 0.2664 & 0.2148 & 0.2085 & 0.2134 \\ \hline
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 name & type  & lm & +R1 & +R2 & +R1+R2 \\ \hline \hline
-la & P\_5 & 0.5143 & 0.3676 & 0.3872 & 0.4084 \\ \hline 
-la & MMR & 0.2947 & 0.1867 & 0.1893 & 0.1933 \\ \hline
-la & NDCG@5 & 0.3195 & 0.2014 & 0.2068 & 0.2153 \\ \hline \hline
-ft & P\_5 & 0.5430 & 0.4031 & 0.3935 & 0.3900 \\ \hline 
-ft & MMR & 0.3235 & 0.2255 & 0.2295 & 0.2255 \\ \hline
-ft & NDCG@5 & 0.3497 & 0.2396 & 0.2399 & 0.2349 \\ \hline \hline
-fbis & P\_5 & 0.4026 & 0.2810 & 0.2893 & 0.2906 \\ \hline 
-fbis & MMR & 0.2486 & 0.1730 & 0.1703 & 0.1716 \\ \hline
-fbis & NDCG@5 & 0.2664 & 0.1742 & 0.1765 & 0.1752 \\ \hline
+la & P\_5 & \textbf{0.5143} & 0.3676 & 0.3872 & 0.4084 \\ \hline 
+la & MMR & \textbf{0.2947} & 0.1867 & 0.1893 & 0.1933 \\ \hline
+la & NDCG@5 & \textbf{0.3195} & 0.2014 & 0.2068 & 0.2153 \\ \hline \hline
+ft & P\_5 & \textbf{0.5430} & 0.4031 & 0.3935 & 0.3900 \\ \hline 
+ft & MMR & \textbf{0.3235} & 0.2255 & 0.2295 & 0.2255 \\ \hline
+ft & NDCG@5 & \textbf{0.3497} & 0.2396 & 0.2399 & 0.2349 \\ \hline \hline
+fbis & P\_5 & \textbf{0.4026} & 0.2810 & 0.2893 & 0.2906 \\ \hline 
+fbis & MMR & \textbf{0.2486} & 0.1730 & 0.1703 & 0.1716 \\ \hline
+fbis & NDCG@5 & \textbf{0.2664} & 0.1742 & 0.1765 & 0.1752 \\ \hline
 \end{tabular}
 \caption{Reranked results for count 50}
 \end{table}
+\section{Discussion}
+Based on the results presented in table 4 and table 5, it is not possible to claim to say that the the experiment shown by Woo et al.\cite{cummins2011improved} have been reimplemented. Rather the results show a decrease in the score. This could easily be due to a misunderstanding on my part as there is a few things that I am not sure I do correct. 
 
 
-
-
-
-
-%% old thingy
-\begin{abstract}
-Write your abstract here. Your abstract should \emph{concisely} say (i) \emph{why} the topic is interesting, (ii) \emph{what} you do in your study, (iii) \emph{how} you did your study and (iv) \emph{what} the results were
-\end{abstract}
-
-\section{Introduction}
-Write your introduction here. Get inspiration on how to structure and formulate an introduction from the studies you review. Make sure you describe what document re-ranking is and why it is useful.
-
-Several studies on document re-ranking have been published before and after \cite{woo2010achieving}. In your introduction, give an overview of \textbf{\emph{at least three}} studies of re-ranking documents published by the ACM between 2003 and 2016. You may find these studies by searching e.g.\ the ACM digital library (\url{http://dl.acm.org}) or Google Scholar. Your literature review of the $3+$ papers must (i) describe the method proposed in the paper, how the method was evaluated and what the results were. Furthermore, it should be clear how each paper differ from the other paper you review. \textbf{Remember: the literature review is meant to help the reader understand where there is a gap in the existing research that you can fill}. Therefore, select papers that are as close as possible to \cite{woo2010achieving}.
-
-You \emph{must} cite your sources when/if you use a specific phrasing. Failure to do so will be considered plagiarism.
-
-\section{Data sets \& Queries}
-List in a table, for each data set, the following characteristics:
-\begin{enumerate}
-\item Name
-\item Number of documents
-\item Average document length
-\item Minimum document length
-\item Maximum document length
-\end{enumerate}
-
-Furthermore, list the number of queries and the average query length for the superset of the queries.
-
-\section{Experimental setup}
-Describe your experimental setup. Do this similarly to how you did in your original projects.
-
-\section{Experiments}
-For indexing, retrieval and evaluation use \textsc{Indri} and use \textsc{trec\_eval}. Index the data sets using the Krovetz stemmer and stop word removal using the list \url{http://ir.dcs.gla.ac.uk/resources/linguistic_utils/stop_words}
-
-Use the title field of the queries (preprocessing of the queries is required to extract the title) and retrieve the top-$k = 20,50$ documents using a query-likelihood language model with Dirichlet smoothing for baseline. Tune your retrieval by setting $\mu = \{1000,1500,2000,2500,3000\}$, and optimise for precision at 5 (P@5). Report this for each data set. Report the best P@5 you obtain. 
-
-Use both $R_1$ and $R_2$ for experiments and re-rank the documents of the initial baseline for both top-$k = 20,50$ documents as specified in \cite{woo2010achieving} using (i) $LM+R_1$, (ii) $LM+R_2$ and (iii) $LM+R_1+R_2$ and evaluate the results using mean reciprocal rank (MRR), precision at 1 (P@1), P@5 and normalised discounted cumulative gain at 5 (NDCG@5). What do you observe? Which heuristic or combination of heuristics performs the best? Present your results in a table similar to Table 1 in \cite{woo2010achieving}. If you have time, can you come up with a heuristic that performs better?
+\subsection{Possible errors}
+I am not sure I handle the rankings of TF-IDF correct, if no terms are present in the dataset. This creates a special situation, where I have decided to set it to what i assume is the worst possible score, 0.
 
 \section{Conclusion}
-Write your conclusion here
+I have tried to reimplement the findings done by Woo et al.\cite{cummins2011improved}, but my experiments show a significant decrease in all scores I have experimented with.
+
 \bibliographystyle{abbrv}
 \bibliography{sigproc}  % sigproc.bib is the name of the 
 \end{document}
