@@ -1,0 +1,88 @@
+% This is "sig-alternate.tex" V2.0 May 2012
+% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
+%
+% This example file demonstrates the use of the 'sig-alternate.cls'
+% V2.5 LaTeX2e document class file. 
+
+\documentclass{sig-alternate}
+\usepackage{color}
+\usepackage[colorlinks,citecolor=blue]{hyperref}
+
+\begin{document}
+
+\conferenceinfo{Information Retrieval}{2016 DIKU, Denmark}
+\title{Query Performance Prediction}
+\numberofauthors{1} 
+\author{
+\alignauthor 
+Your name
+}
+\maketitle
+
+\begin{abstract}
+Write your abstract here. Your abstract should \emph{concisely} say (i) \emph{why} the topic is interesting, (ii) \emph{what} you do in your study, (iii) \emph{how} you did your study and (iv) \emph{what} the results were
+\end{abstract}
+
+\section{Introduction}
+Write your introduction here. Get inspiration on how to structure and formulate an introduction from the studies you review. Make sure you describe what query performance prediction is and why it is useful.
+
+Several studies on query-performance prediction have been published before and after \cite{cummins2011improved}. In your introduction, give an overview of \textbf{\emph{at least three}} studies of query-performance prediction published by the ACM between 2005 and 2016. You may find these studies by searching e.g.\ the ACM digital library (\url{http://dl.acm.org}) or Google Scholar. Your literature review of the $3+$ papers must (i) describe the method proposed in the paper, how the method was evaluated and what the results were. Furthermore, it should be clear how each paper differ from the other paper you review. \textbf{Remember: the literature review is meant to help the reader understand where there is a gap in the existing research that you can fill}. Therefore, select papers that are as close as possible to \cite{cummins2011improved}. 
+
+You \emph{must} cite your sources when/if you use a specific phrasing. Failure to do so will be considered plagiarism.
+aaaaa
+\section{Data sets \& Queries}
+List in a table similar to Table 1 in \cite{cummins2011improved}, for each data set, the following characteristics:
+\begin{enumerate}
+\item Name
+\item Number of documents
+\item Average document length
+\item Minimum document length
+\item Maximum document length
+\end{enumerate}
+
+Furthermore, list the number of queries and the average query length for the superset of the queries.
+
+\section{Experiments}
+For indexing, retrieval and evaluation use \textsc{Indri} and use \textsc{trec\_eval}. Index the data sets using the Krovetz stemmer and stop word removal using the list \url{http://ir.dcs.gla.ac.uk/resources/linguistic_utils/stop_words}. Use the BM25 ranking model for retrieval. You are not required to tune any parameter, but are welcome to do so.
+
+Use values of $N=\{20,50,100,200\}$ and report a table similar to that of Table 2 in \cite{cummins2011improved} setting $\sigma=\{0.1,0.3,0.5,0.7,0.9\}$ and include the normalised version (see the paper). Use both Pearson's $r$ and Spearman's $\rho$, and use only the title of each query. Where is the correlation with P@10 the highest for each $N$? Where is it best overall? Why do you think that is? Repeat the above with at least one other metric (e.g.\ MRR, nDCG etc.). Which one gives you the highest correlation?
+
+As the standard deviation assumes data are normally distributed (which is not case for many real-life data sets), repeat the above analysis, but instead of $\sigma$ use the \emph{mean absolute deviation}:
+\begin{equation}
+\text{MAD} = \text{median}\left(x_i - \text{median}(x)\right)
+\end{equation}
+Does MAD correlate with P@10 better than compared to using the standard deviation? Why? What is the best correlation you get? What about the normalised version of the MAD?
+
+Finally, produce a Table similar to Table 4 in \cite{cummins2011improved} for one of the datasets of your choosing. Use the simplified clarify score (scs), average IDF ($idf_{avg}$), query scope (qs) and $\sigma_{\max}$ predictors. 
+
+The simplified clarify score \cite{he2004inferring} (scs) is given by:
+\begin{equation}
+scs(Q) = \displaystyle\sum_{w\in V}P(w\vert Q)\log_2\frac{P(w\vert Q)}{P_{\text{coll}(w)}}
+\end{equation}
+where $w$ is a word in the vocabulary $V$ of the data set or query $Q$, $P(w\vert Q)$ is the conditional probability (relative frequency or MLE estimate) of $w$ in the query $Q$ and $P_{\text{coll}}(w)$ is the probability of $w$ in the data set (the relative frequency of $w$ in $V$).
+
+The query scope \cite{he2004inferring} (qs) is given by:
+\begin{equation}
+qs(Q) = -\log(n_Q/N)
+\end{equation}
+where $\log$ denotes the natural logarithm, $n_q$ is the number of documents in the data set that contains \emph{at least} one of the query terms, and $N$ is the number of documents in the data set.
+
+Compare your best correlations with these predictors.
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\section{Conclusion}
+Write your conclusion here
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+%APPENDICES are optional
+%\balancecolumns
+%\appendix
+%Appendix A
+%\balancecolumns % GM June 2007
+\end{document}

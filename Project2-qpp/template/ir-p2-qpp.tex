@@ -1,0 +1,246 @@
+% This is "sig-alternate.tex" V2.0 May 2012
+% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
+%
+% This example file demonstrates the use of the 'sig-alternate.cls'
+% V2.5 LaTeX2e document class file. 
+
+\documentclass{sig-alternate}
+\usepackage{color}
+\usepackage[colorlinks,citecolor=blue]{hyperref}
+
+\begin{document}
+
+\conferenceinfo{Information Retrieval}{2016 DIKU, Denmark}
+\title{Query Performance Prediction}
+\numberofauthors{1} 
+\author{
+\alignauthor 
+Your name
+}
+\maketitle
+
+\begin{abstract}
+Only template
+
+Write your abstract here. Your abstract should \emph{concisely} say (i) \emph{why} the topic is interesting, (ii) \emph{what} you do in your study, (iii) \emph{how} you did your study and (iv) \emph{what} the results were
+\end{abstract}
+
+\section{Introduction}
+The world is heavily dependant on search engines. Because of this, it is of increasing importance that search engines provide the best possible result for all queries. This leads to increasing demands for information retrieval (IR) systems, when predicting the succesfullnes of new approaches.
+
+Query performance prediction (QPP) is one approach for testing approaches. This approach is used to calculate the performance of a query before or after it's put through the IR system. Using QPP it is possible to choose strategy with a queries to improve the IR systems performance and succesfullnes. One way would be to preemptivly try to predict how a query would perform with several different search engines. Then the system could choose the one ir predict it would perform the best width.
+
+There are several studies about QPP, and a study by Hauff and Azzopardi\cite{review1} test whether or not there is actually any need for us to apply QPP. They investigate when there is a reason to even try to apply QPP on search queries to increse performance. They conclude that even QPP can increase IR systems performance, it only applies when Kendall's Tau correlation of $\tau >= 0.5$
+
+
+
+Only template
+
+Write your introduction here. Get inspiration on how to structure and formulate an introduction from the studies you review. Make sure you describe what query performance prediction is and why it is useful.
+
+Several studies on query-performance prediction have been published before and after \cite{cummins2011improved}. In your introduction, give an overview of \textbf{\emph{at least three}} studies of query-performance prediction published by the ACM between 2005 and 2016. You may find these studies by searching e.g.\ the ACM digital library (\url{http://dl.acm.org}) or Google Scholar. Your literature review of the $3+$ papers must (i) describe the method proposed in the paper, how the method was evaluated and what the results were. Furthermore, it should be clear how each paper differ from the other paper you review. \textbf{Remember: the literature review is meant to help the reader understand where there is a gap in the existing research that you can fill}. Therefore, select papers that are as close as possible to \cite{cummins2011improved}. 
+
+You \emph{must} cite your sources when/if you use a specific phrasing. Failure to do so will be considered plagiarism.
+aaaaa
+\section{Data sets \& Queries}
+\subsection{Test collections}
+The data used in this paper is a collection of TREC collections with a large amount of documents, and varying document length and length deviation to test the prediction in many situations. Table 1 shows an overview of the data.  
+\begin{table}[h!]
+\centering
+\caption{Document data sets}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Name           & laTimes & fbis   & ft     \\ \hline
+document count & 131896  & 130471 & 210158 \\ \hline
+average length & 502     & 504    & 399    \\ \hline
+minimum length & 2       & 12     & 11     \\ \hline
+maximum        & 24125   & 143175 & 26145  \\ \hline
+\end{tabular}
+\end{table}
+
+The queries look like this
+\begin{table}[h!]
+\centering
+\caption{queries data set}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+Name           & queries \\ \hline
+document count & 150     \\ \hline
+average length & 19.54   \\ \hline
+\end{tabular}
+\end{table}
+
+Furthermore, list the number of queries and the average query length for the superset of the queries.
+
+\section{Experiments}
+Only template
+
+For indexing, retrieval and evaluation use \textsc{Indri} and use \textsc{trec\_eval}. Index the data sets using the Krovetz stemmer and stop word removal using the list \url{http://ir.dcs.gla.ac.uk/resources/linguistic_utils/stop_words}. Use the BM25 ranking model for retrieval. You are not required to tune any parameter, but are welcome to do so.
+
+Use values of $N=\{20,50,100,200\}$ and report a table similar to that of Table 2 in \cite{cummins2011improved} setting $\sigma=\{0.1,0.3,0.5,0.7,0.9\}$ and include the normalised version (see the paper). Use both Pearson's $r$ and Spearman's $\rho$, and use only the title of each query. Where is the correlation with P@10 the highest for each $N$? Where is it best overall? Why do you think that is? Repeat the above with at least one other metric (e.g.\ MRR, nDCG etc.). Which one gives you the highest correlation?
+
+As the standard deviation assumes data are normally distributed (which is not case for many real-life data sets), repeat the above analysis, but instead of $\sigma$ use the \emph{mean absolute deviation}:
+\begin{equation}
+\text{MAD} = \text{median}\left(x_i - \text{median}(x)\right)
+\end{equation}
+Does MAD correlate with P@10 better than compared to using the standard deviation? Why? What is the best correlation you get? What about the normalised version of the MAD?
+
+Finally, produce a Table similar to Table 4 in \cite{cummins2011improved} for one of the datasets of your choosing. Use the simplified clarify score (scs), average IDF ($idf_{avg}$), query scope (qs) and $\sigma_{\max}$ predictors. 
+
+The simplified clarify score \cite{he2004inferring} (scs) is given by:
+\begin{equation}
+scs(Q) = \displaystyle\sum_{w\in V}P(w\vert Q)\log_2\frac{P(w\vert Q)}{P_{\text{coll}(w)}}
+\end{equation}
+where $w$ is a word in the vocabulary $V$ of the data set or query $Q$, $P(w\vert Q)$ is the conditional probability (relative frequency or MLE estimate) of $w$ in the query $Q$ and $P_{\text{coll}}(w)$ is the probability of $w$ in the data set (the relative frequency of $w$ in $V$).
+
+The query scope \cite{he2004inferring} (qs) is given by:
+\begin{equation}
+qs(Q) = -\log(n_Q/N)
+\end{equation}
+where $\log$ denotes the natural logarithm, $n_q$ is the number of documents in the data set that contains \emph{at least} one of the query terms, and $N$ is the number of documents in the data set.
+
+Compare your best correlations with these predictors.
+
+\section{tables}
+
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3686 & 0.3734 & 0.3665 & 0.2312 & 0.1115 \\ \hline
+Spearman  & 0.3464 & 0.3464 & 0.3625 & 0.2578 & 0.0409 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3824 & 0.3698 & 0.4077 & 0.2335 & 0.1067 \\ \hline
+Spearman  & 0.2571 & 0.253 & 0.3512 & 0.2385 & 0.0393 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2708 & 0.3171 & 0.3954 & 0.2268 & 0.1042 \\ \hline
+Spearman  & 0.2192 & 0.2798 & 0.3305 & 0.2319 & 0.0368 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2762 & 0.3543 & 0.3608 & 0.2172 & 0.1042 \\ \hline
+Spearman  & 0.1418 & 0.2061 & 0.2512 & 0.2182 & 0.0368 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2388 & 0.2277 & 0.2185 & 0.277 & 0.2452 \\ \hline
+Spearman  & 0.3025 & 0.3032 & 0.3437 & 0.32 & 0.1657 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1693 & 0.1787 & 0.2528 & 0.2633 & 0.2411 \\ \hline
+Spearman  & 0.2317 & 0.2458 & 0.3577 & 0.2708 & 0.1622 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.0658 & 0.1572 & 0.2635 & 0.2543 & 0.2395 \\ \hline
+Spearman  & 0.1196 & 0.1869 & 0.3527 & 0.2418 & 0.1585 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & -0.0021 & 0.1208 & 0.2786 & 0.2491 & 0.2395 \\ \hline
+Spearman  & 0.0238 & 0.1237 & 0.3543 & 0.2232 & 0.1585 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2852 & 0.2735 & 0.2008 & 0.105 & 0.3691 \\ \hline
+Spearman  & 0.1882 & 0.1807 & 0.1583 & 0.111 & 0.335 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1314 & 0.1447 & 0.1763 & 0.1028 & 0.3706 \\ \hline
+Spearman  & 0.1871 & 0.1692 & 0.2139 & 0.0994 & 0.3439 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2276 & 0.28 & 0.2434 & 0.1127 & 0.3706 \\ \hline
+Spearman  & 0.2127 & 0.2153 & 0.2495 & 0.1019 & 0.3456 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2032 & 0.2921 & 0.2416 & 0.1049 & 0.3704 \\ \hline
+Spearman  & 0.232 & 0.2715 & 0.2545 & 0.1063 & 0.3452 \\ \hline
+\end{tabular}
+\end{table}
+
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\section{Conclusion}
+Write your conclusion here
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+%APPENDICES are optional
+%\balancecolumns
+%\appendix
+%Appendix A
+%\balancecolumns % GM June 2007
+\end{document}
