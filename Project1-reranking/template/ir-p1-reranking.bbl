@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{review3}
+D.~W.~O. Jiaul H.~Paik.
+\newblock A fixed-point method for weighting terms in verbose informational
+  queries.
+\newblock ACM, 2014.
+
+\bibitem{review1}
+J.~H. Paik.
+\newblock A novel tf-idf weighting scheme for effective ranking.
+\newblock ACM, 2013.
+
+\bibitem{review2}
+K.~T. Takehiro~Yamamoto, Satoshi~Nakamura.
+\newblock Rerankeverything: A reranking interface for browsing search results.
+\newblock pages 1913--1916. ACM, 2011.
+
+\bibitem{woo2010achieving}
+H.-W. Woo, J.-T. Lee, S.-W. Lee, Y.-I. Song, and H.-C. Rim.
+\newblock Achieving high accuracy retrieval using intra-document term ranking.
+\newblock In {\em Proceedings of the 33rd international ACM SIGIR conference on
+  Research and development in information retrieval}, pages 885--886. ACM,
+  2010.
+
+\end{thebibliography}

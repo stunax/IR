@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: ir-p1-reranking.aux
+The style file: abbrv.bst
+Database file #1: sigproc.bib
+Warning--I didn't find a database entry for "cummins2011improved"
+Warning--empty booktitle in review3
+Warning--empty booktitle in review1
+Warning--empty booktitle in review2
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            518 strings with 4373 characters,
+and the built_in function-call counts, 1499 in all, are:
+= -- 150
+> -- 49
+< -- 2
++ -- 22
+- -- 16
+* -- 79
+:= -- 228
+add.period$ -- 14
+call.type$ -- 4
+change.case$ -- 20
+chr.to.int$ -- 0
+cite$ -- 7
+duplicate$ -- 73
+empty$ -- 136
+format.name$ -- 16
+if$ -- 340
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 4
+newline$ -- 23
+num.names$ -- 8
+pop$ -- 37
+preamble$ -- 1
+purify$ -- 16
+quote$ -- 0
+skip$ -- 51
+stack$ -- 0
+substring$ -- 90
+swap$ -- 25
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 16
+warning$ -- 3
+while$ -- 13
+width$ -- 5
+write$ -- 45
+(There were 4 warnings)
