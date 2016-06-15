@@ -30,7 +30,9 @@ The world is heavily dependant on search engines. Because of this, it is of incr
 
 Query performance prediction (QPP) is one approach for testing approaches. This approach is used to calculate the performance of a query before or after it's put through the IR system. Using QPP it is possible to choose strategy with a queries to improve the IR systems performance and succesfullnes. One way would be to preemptivly try to predict how a query would perform with several different search engines. Then the system could choose the one ir predict it would perform the best width.
 
-There are several studies about QPP, and a study by Hauff and Azzopardi\cite{review1} test whether or not there is actually any need for us to apply QPP. They investigate when there is a reason to even try to apply QPP on search queries to increse performance. They conclude that even QPP can increase IR systems performance, it only applies when Kendall's Tau correlation of $\tau >= 0.5$
+There are several studies about QPP, and a study by Hauff and Azzopardi\cite{review1} test whether or not there is actually any need for us to apply QPP. They investigate when there is a reason to even try to apply QPP on search queries to increse performance. They conclude that even QPP can increase IR systems performance, it only applies when Kendall's Tau correlation of $\tau >= 0.5$ is achieved by the IR system. Because of this they claim that QPP does not lead to any significant increase in query performance, but rather leads to a decrease, as many State of the art IR systems do not acheive the before mentioned $\tau$ value yet. 
+
+
 
 
 
@@ -104,10 +106,143 @@ where $\log$ denotes the natural logarithm, $n_q$ is the number of documents in 
 Compare your best correlations with these predictors.
 
 \section{tables}
-
+False False la 20
+queries,150, 19.54 , 6 , 33
 \begin{table}[h!]
 \centering
 \caption{$\sigma_{\%}$ correlations for la20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3273 & 0.3379 & 0.3249 & 0.2384 & 0.0335 \\ \hline
+Spearman  & 0.4083 & 0.4138 & 0.4045 & 0.2606 & -0.0309 \\ \hline
+\end{tabular}
+\end{table}
+False False la 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.4142 & 0.4007 & 0.3591 & 0.2383 & 0.0282 \\ \hline
+Spearman  & 0.4078 & 0.4076 & 0.3914 & 0.2596 & -0.032 \\ \hline
+\end{tabular}
+\end{table}
+False False la 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.4016 & 0.382 & 0.3533 & 0.2311 & 0.0253 \\ \hline
+Spearman  & 0.3917 & 0.3917 & 0.3738 & 0.2583 & -0.0337 \\ \hline
+\end{tabular}
+\end{table}
+False False la 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3767 & 0.3708 & 0.3498 & 0.2226 & 0.0253 \\ \hline
+Spearman  & 0.357 & 0.3672 & 0.3658 & 0.2533 & -0.0337 \\ \hline
+\end{tabular}
+\end{table}
+False False ft 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.334 & 0.3345 & 0.3055 & 0.3095 & 0.2253 \\ \hline
+Spearman  & 0.4443 & 0.444 & 0.4277 & 0.3513 & 0.1702 \\ \hline
+\end{tabular}
+\end{table}
+False False ft 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3449 & 0.3544 & 0.3364 & 0.3057 & 0.2186 \\ \hline
+Spearman  & 0.44 & 0.4407 & 0.4401 & 0.3385 & 0.1642 \\ \hline
+\end{tabular}
+\end{table}
+False False ft 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3328 & 0.3374 & 0.3403 & 0.3068 & 0.2171 \\ \hline
+Spearman  & 0.401 & 0.4111 & 0.4253 & 0.3285 & 0.1639 \\ \hline
+\end{tabular}
+\end{table}
+False False ft 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3089 & 0.3261 & 0.3461 & 0.3022 & 0.2171 \\ \hline
+Spearman  & 0.3512 & 0.3678 & 0.4159 & 0.323 & 0.1639 \\ \hline
+\end{tabular}
+\end{table}
+False False fbis 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1911 & 0.1794 & 0.1327 & 0.0832 & 0.3151 \\ \hline
+Spearman  & 0.1307 & 0.1204 & 0.0994 & 0.0719 & 0.2911 \\ \hline
+\end{tabular}
+\end{table}
+False False fbis 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2144 & 0.1982 & 0.1501 & 0.1175 & 0.3172 \\ \hline
+Spearman  & 0.1817 & 0.1769 & 0.1532 & 0.119 & 0.2976 \\ \hline
+\end{tabular}
+\end{table}
+False False fbis 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2382 & 0.232 & 0.1837 & 0.1321 & 0.3174 \\ \hline
+Spearman  & 0.2141 & 0.21 & 0.1929 & 0.1341 & 0.2988 \\ \hline
+\end{tabular}
+\end{table}
+False False fbis 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2619 & 0.2783 & 0.2007 & 0.1379 & 0.3173 \\ \hline
+Spearman  & 0.2565 & 0.2629 & 0.2196 & 0.1433 & 0.2988 \\ \hline
+\end{tabular}
+\end{table}
+False True la 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADla20}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -115,9 +250,10 @@ Pearsons  & 0.3686 & 0.3734 & 0.3665 & 0.2312 & 0.1115 \\ \hline
 Spearman  & 0.3464 & 0.3464 & 0.3625 & 0.2578 & 0.0409 \\ \hline
 \end{tabular}
 \end{table}
+False True la 50
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for la50}
+\caption{$\sigma_{\%}$ correlations for MADla50}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -125,9 +261,10 @@ Pearsons  & 0.3824 & 0.3698 & 0.4077 & 0.2335 & 0.1067 \\ \hline
 Spearman  & 0.2571 & 0.253 & 0.3512 & 0.2385 & 0.0393 \\ \hline
 \end{tabular}
 \end{table}
+False True la 100
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for la100}
+\caption{$\sigma_{\%}$ correlations for MADla100}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -135,9 +272,10 @@ Pearsons  & 0.2708 & 0.3171 & 0.3954 & 0.2268 & 0.1042 \\ \hline
 Spearman  & 0.2192 & 0.2798 & 0.3305 & 0.2319 & 0.0368 \\ \hline
 \end{tabular}
 \end{table}
+False True la 200
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for la200}
+\caption{$\sigma_{\%}$ correlations for MADla200}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -145,9 +283,10 @@ Pearsons  & 0.2762 & 0.3543 & 0.3608 & 0.2172 & 0.1042 \\ \hline
 Spearman  & 0.1418 & 0.2061 & 0.2512 & 0.2182 & 0.0368 \\ \hline
 \end{tabular}
 \end{table}
+False True ft 20
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for ft20}
+\caption{$\sigma_{\%}$ correlations for MADft20}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -155,9 +294,10 @@ Pearsons  & 0.2388 & 0.2277 & 0.2185 & 0.277 & 0.2452 \\ \hline
 Spearman  & 0.3025 & 0.3032 & 0.3437 & 0.32 & 0.1657 \\ \hline
 \end{tabular}
 \end{table}
+False True ft 50
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for ft50}
+\caption{$\sigma_{\%}$ correlations for MADft50}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -165,9 +305,10 @@ Pearsons  & 0.1693 & 0.1787 & 0.2528 & 0.2633 & 0.2411 \\ \hline
 Spearman  & 0.2317 & 0.2458 & 0.3577 & 0.2708 & 0.1622 \\ \hline
 \end{tabular}
 \end{table}
+False True ft 100
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for ft100}
+\caption{$\sigma_{\%}$ correlations for MADft100}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -175,9 +316,10 @@ Pearsons  & 0.0658 & 0.1572 & 0.2635 & 0.2543 & 0.2395 \\ \hline
 Spearman  & 0.1196 & 0.1869 & 0.3527 & 0.2418 & 0.1585 \\ \hline
 \end{tabular}
 \end{table}
+False True ft 200
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for ft200}
+\caption{$\sigma_{\%}$ correlations for MADft200}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -185,9 +327,10 @@ Pearsons  & -0.0021 & 0.1208 & 0.2786 & 0.2491 & 0.2395 \\ \hline
 Spearman  & 0.0238 & 0.1237 & 0.3543 & 0.2232 & 0.1585 \\ \hline
 \end{tabular}
 \end{table}
+False True fbis 20
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for fbis20}
+\caption{$\sigma_{\%}$ correlations for MADfbis20}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -195,9 +338,10 @@ Pearsons  & 0.2852 & 0.2735 & 0.2008 & 0.105 & 0.3691 \\ \hline
 Spearman  & 0.1882 & 0.1807 & 0.1583 & 0.111 & 0.335 \\ \hline
 \end{tabular}
 \end{table}
+False True fbis 50
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for fbis50}
+\caption{$\sigma_{\%}$ correlations for MADfbis50}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -205,9 +349,10 @@ Pearsons  & 0.1314 & 0.1447 & 0.1763 & 0.1028 & 0.3706 \\ \hline
 Spearman  & 0.1871 & 0.1692 & 0.2139 & 0.0994 & 0.3439 \\ \hline
 \end{tabular}
 \end{table}
+False True fbis 100
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for fbis100}
+\caption{$\sigma_{\%}$ correlations for MADfbis100}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -215,9 +360,10 @@ Pearsons  & 0.2276 & 0.28 & 0.2434 & 0.1127 & 0.3706 \\ \hline
 Spearman  & 0.2127 & 0.2153 & 0.2495 & 0.1019 & 0.3456 \\ \hline
 \end{tabular}
 \end{table}
+False True fbis 200
 \begin{table}[h!]
 \centering
-\caption{$\sigma_{\%}$ correlations for fbis200}
+\caption{$\sigma_{\%}$ correlations for MADfbis200}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
@@ -225,6 +371,271 @@ Pearsons  & 0.2032 & 0.2921 & 0.2416 & 0.1049 & 0.3704 \\ \hline
 Spearman  & 0.232 & 0.2715 & 0.2545 & 0.1063 & 0.3452 \\ \hline
 \end{tabular}
 \end{table}
+True False la 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3929 & 0.4102 & 0.4072 & 0.3455 & 0.0926 \\ \hline
+Spearman  & 0.432 & 0.4369 & 0.4343 & 0.3127 & 0.0145 \\ \hline
+\end{tabular}
+\end{table}
+True False la 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.4336 & 0.4393 & 0.4207 & 0.3489 & 0.0879 \\ \hline
+Spearman  & 0.433 & 0.4339 & 0.4278 & 0.3168 & 0.0131 \\ \hline
+\end{tabular}
+\end{table}
+True False la 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.4197 & 0.431 & 0.4193 & 0.3427 & 0.0848 \\ \hline
+Spearman  & 0.4254 & 0.427 & 0.4183 & 0.3171 & 0.0097 \\ \hline
+\end{tabular}
+\end{table}
+True False la 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for la200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.391 & 0.4229 & 0.4187 & 0.337 & 0.0848 \\ \hline
+Spearman  & 0.3906 & 0.4004 & 0.4095 & 0.3134 & 0.0097 \\ \hline
+\end{tabular}
+\end{table}
+True False ft 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2528 & 0.2544 & 0.2562 & 0.2525 & 0.1521 \\ \hline
+Spearman  & 0.4159 & 0.4159 & 0.3956 & 0.3149 & 0.1446 \\ \hline
+\end{tabular}
+\end{table}
+True False ft 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2255 & 0.2386 & 0.2712 & 0.2359 & 0.1448 \\ \hline
+Spearman  & 0.4001 & 0.4003 & 0.393 & 0.2935 & 0.1437 \\ \hline
+\end{tabular}
+\end{table}
+True False ft 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1924 & 0.2058 & 0.2633 & 0.2328 & 0.1428 \\ \hline
+Spearman  & 0.36 & 0.3659 & 0.3777 & 0.2877 & 0.1446 \\ \hline
+\end{tabular}
+\end{table}
+True False ft 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for ft200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1521 & 0.1869 & 0.2646 & 0.2284 & 0.1428 \\ \hline
+Spearman  & 0.3149 & 0.333 & 0.3749 & 0.2897 & 0.1446 \\ \hline
+\end{tabular}
+\end{table}
+True False fbis 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2217 & 0.214 & 0.1729 & 0.1134 & 0.3545 \\ \hline
+Spearman  & 0.1568 & 0.1473 & 0.1333 & 0.1325 & 0.3365 \\ \hline
+\end{tabular}
+\end{table}
+True False fbis 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2278 & 0.2338 & 0.2001 & 0.1483 & 0.3558 \\ \hline
+Spearman  & 0.1966 & 0.188 & 0.1802 & 0.1632 & 0.3456 \\ \hline
+\end{tabular}
+\end{table}
+True False fbis 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2377 & 0.2563 & 0.2299 & 0.1618 & 0.3555 \\ \hline
+Spearman  & 0.2306 & 0.2222 & 0.2203 & 0.1815 & 0.3485 \\ \hline
+\end{tabular}
+\end{table}
+True False fbis 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for fbis200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2544 & 0.2951 & 0.2458 & 0.1668 & 0.3554 \\ \hline
+Spearman  & 0.2781 & 0.2821 & 0.2492 & 0.1981 & 0.3485 \\ \hline
+\end{tabular}
+\end{table}
+True True la 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADla20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3858 & 0.3827 & 0.3604 & 0.321 & 0.1535 \\ \hline
+Spearman  & 0.3725 & 0.3715 & 0.382 & 0.2796 & 0.0468 \\ \hline
+\end{tabular}
+\end{table}
+True True la 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADla50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.3901 & 0.3737 & 0.3787 & 0.3162 & 0.1492 \\ \hline
+Spearman  & 0.297 & 0.2931 & 0.3928 & 0.2755 & 0.0462 \\ \hline
+\end{tabular}
+\end{table}
+True True la 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADla100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.288 & 0.3446 & 0.3745 & 0.3122 & 0.1467 \\ \hline
+Spearman  & 0.2441 & 0.3083 & 0.3705 & 0.2688 & 0.0423 \\ \hline
+\end{tabular}
+\end{table}
+True True la 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADla200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2759 & 0.3571 & 0.3505 & 0.3065 & 0.1467 \\ \hline
+Spearman  & 0.1881 & 0.2472 & 0.2992 & 0.2567 & 0.0423 \\ \hline
+\end{tabular}
+\end{table}
+True True ft 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADft20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1514 & 0.1466 & 0.1743 & 0.2174 & 0.1745 \\ \hline
+Spearman  & 0.2651 & 0.2662 & 0.3062 & 0.2765 & 0.153 \\ \hline
+\end{tabular}
+\end{table}
+True True ft 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADft50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.0689 & 0.0868 & 0.1781 & 0.2021 & 0.1693 \\ \hline
+Spearman  & 0.2041 & 0.2176 & 0.3239 & 0.2341 & 0.1527 \\ \hline
+\end{tabular}
+\end{table}
+True True ft 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADft100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & -0.0145 & 0.0579 & 0.174 & 0.191 & 0.1671 \\ \hline
+Spearman  & 0.1108 & 0.1691 & 0.3146 & 0.2131 & 0.1479 \\ \hline
+\end{tabular}
+\end{table}
+True True ft 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADft200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & -0.0507 & 0.0363 & 0.1832 & 0.1875 & 0.1671 \\ \hline
+Spearman  & 0.005 & 0.097 & 0.3121 & 0.2044 & 0.1479 \\ \hline
+\end{tabular}
+\end{table}
+True True fbis 20
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADfbis20}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.2831 & 0.2798 & 0.2355 & 0.1244 & 0.3796 \\ \hline
+Spearman  & 0.2034 & 0.1948 & 0.1712 & 0.1374 & 0.3564 \\ \hline
+\end{tabular}
+\end{table}
+True True fbis 50
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADfbis50}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1679 & 0.1994 & 0.2363 & 0.1258 & 0.3803 \\ \hline
+Spearman  & 0.2106 & 0.1916 & 0.2373 & 0.1331 & 0.3687 \\ \hline
+\end{tabular}
+\end{table}
+True True fbis 100
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADfbis100}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1989 & 0.2609 & 0.2764 & 0.1323 & 0.3796 \\ \hline
+Spearman  & 0.2453 & 0.2427 & 0.2778 & 0.1477 & 0.3681 \\ \hline
+\end{tabular}
+\end{table}
+True True fbis 200
+\begin{table}[h!]
+\centering
+\caption{$\sigma_{\%}$ correlations for MADfbis200}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
+Pearsons  & 0.1982 & 0.2932 & 0.275 & 0.1235 & 0.3794 \\ \hline
+Spearman  & 0.2519 & 0.2851 & 0.2746 & 0.1487 & 0.368 \\ \hline
+\end{tabular}
+\end{table}
+
 
 % The following two commands are all you need in the
 % initial runs of your .tex file to
