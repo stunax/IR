@@ -7,6 +7,8 @@
 \documentclass{sig-alternate}
 \usepackage{color}
 \usepackage[colorlinks,citecolor=blue]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
 
 \begin{document}
 
@@ -15,37 +17,41 @@
 \numberofauthors{1} 
 \author{
 \alignauthor 
-Your name
+Christian Edsberg Møllgaard \\ DPJ482
 }
 \maketitle
 
 \begin{abstract}
-Only template
+This paper examines the possibility of using standard deviation as a post retrieval query performance predictor, and comparing the result with median absolute deviation. Using these as a predictor is much cheaper computational wise. The study used several used Precision at 5 and Bpref to test if there was a correlation. The study was unable to conclude anything, but found some fields that may be interesting for further studies.
 
-Write your abstract here. Your abstract should \emph{concisely} say (i) \emph{why} the topic is interesting, (ii) \emph{what} you do in your study, (iii) \emph{how} you did your study and (iv) \emph{what} the results were
 \end{abstract}
 
 \section{Introduction}
-The world is heavily dependant on search engines. Because of this, it is of increasing importance that search engines provide the best possible result for all queries. This leads to increasing demands for information retrieval (IR) systems, when predicting the succesfullnes of new approaches.
+The world is heavily dependant on search engines. Because of this, it is of increasing importance that search engines provide the best possible result for all queries. This leads to increasing demands for information retrieval (IR) systems, when predicting the successfulness of new approaches.
 
-Query performance prediction (QPP) is one approach for testing approaches. This approach is used to calculate the performance of a query before or after it's put through the IR system. Using QPP it is possible to choose strategy with a queries to improve the IR systems performance and succesfullnes. One way would be to preemptivly try to predict how a query would perform with several different search engines. Then the system could choose the one ir predict it would perform the best width.
+Query performance prediction (QPP) is one approach for testing approaches. This approach is used to calculate the performance of a query before or after it's put through the IR system. Using QPP it is possible to choose strategy with a queries to improve the IR systems performance and successfulness. One way would be to redemptive try to predict how a query would perform with several different search engines. Then the system could choose the one IR system the prediction would perform the best width.
 
-There are several studies about QPP, and a study by Hauff and Azzopardi\cite{review1} test whether or not there is actually any need for us to apply QPP. They investigate when there is a reason to even try to apply QPP on search queries to increse performance. They conclude that even QPP can increase IR systems performance, it only applies when Kendall's Tau correlation of $\tau >= 0.5$ is achieved by the IR system. Because of this they claim that QPP does not lead to any significant increase in query performance, but rather leads to a decrease, as many State of the art IR systems do not acheive the before mentioned $\tau$ value yet. 
+There are several studies about QPP, and a study by Hauff and Azzopardi\cite{review1} test whether or not there is actually any need for us to apply QPP. They investigate when there is a reason to even try to apply QPP on search queries to increase performance. They conclude that even QPP can increase IR systems performance, it only applies when Kendall's Tau correlation of $\tau >= 0.5$ is achieved by the IR system. Because of this they claim that QPP does not lead to any significant increase in query performance, but rather leads to a decrease, as many State of the art IR systems do not acheive the before mentioned $\tau$ value yet. 
 
+In another article by Hauff, Hiemstra, and Jong\cite{review3}, they study the how pre-retrieval query performance. They measure how several pre-retrieval IR systems perform on several document and query collections, to see if an extra layer of IR with pre-retrieval QPP can be increase the performance of the IR system. There is no real conclusions, as many preretrieval strategies only increased the performance with some collections, while they actually reduced the performance with others. 
 
+In this article from Pérez-Iglesias and Araujo\cite{review2} they propose that the score deviation of QPP can be used to estimate the effectiveness of the QPP for post retrieval QPP. They examine the correlation between different QPP effectiveness and their QPP score deviation, to see if a more diverse scoring leads to better results, which they conclude it does.
 
+The previous article lead us to the experiment on which this paper is based upon. The article by Cummins er. al. \cite{cummins2011improved} examines standard deviation as a predictor for the QPP performance. They conclude that using the standard deviation it better and cheaper as a post retrieval method for queries of short or medium length, and is much cheaper to calculate, than many other post retrieval QPP.
 
+The previous article lead us to this article where we then want to investigate their claims, and compare them to another deviation score, to see if we can both replicate their result, and how their result compares to another deviation calculation.
 
-Only template
+\section{Methodology}
+The standard deviation proposed by Cummins et. al. use several different cut-off points, in the range 10\% to 90\% of the top retrieved documents. Then calculating the standard deviation on only the top documents per query. This results is then correlated with the average precision. This is done for both the normal standard deviation, but also the normalised standard deviation. It will be normalised with the Query length.$$
+n(\sigma_{x\%})=\frac{\sigma_{x\%}}{\sqrt{Querylength}}
+$$
 
-Write your introduction here. Get inspiration on how to structure and formulate an introduction from the studies you review. Make sure you describe what query performance prediction is and why it is useful.
-
-Several studies on query-performance prediction have been published before and after \cite{cummins2011improved}. In your introduction, give an overview of \textbf{\emph{at least three}} studies of query-performance prediction published by the ACM between 2005 and 2016. You may find these studies by searching e.g.\ the ACM digital library (\url{http://dl.acm.org}) or Google Scholar. Your literature review of the $3+$ papers must (i) describe the method proposed in the paper, how the method was evaluated and what the results were. Furthermore, it should be clear how each paper differ from the other paper you review. \textbf{Remember: the literature review is meant to help the reader understand where there is a gap in the existing research that you can fill}. Therefore, select papers that are as close as possible to \cite{cummins2011improved}. 
-
-You \emph{must} cite your sources when/if you use a specific phrasing. Failure to do so will be considered plagiarism.
-aaaaa
+These results are then compared to another deviation function, the median absolute deviation(MAD) function. It is described as follows
+\begin{equation}
+\text{MAD} = \text{median}\left(x_i - \text{median}(x)\right)
+\end{equation}
+The whole experiment is replicated using the MAD to see if I can achieve the same or better correlation.
 \section{Data sets \& Queries}
-\subsection{Test collections}
 The data used in this paper is a collection of TREC collections with a large amount of documents, and varying document length and length deviation to test the prediction in many situations. Table 1 shows an overview of the data.  
 \begin{table}[h!]
 \centering
@@ -76,572 +82,23 @@ average length & 19.54   \\ \hline
 
 Furthermore, list the number of queries and the average query length for the superset of the queries.
 
-\section{Experiments}
-Only template
+\section{Experimental setup}
+For all comparisons I use the Krovetz stemmer, and use Okapi BM25 with k1=1.2,b=0.75 and k3 = 7 using the Indri to calculate all this. I use c++ and Python in unison with Indri to reprocess and present the findings done by Indri. The query performance is calculated using TREC\_EVAL.
 
-For indexing, retrieval and evaluation use \textsc{Indri} and use \textsc{trec\_eval}. Index the data sets using the Krovetz stemmer and stop word removal using the list \url{http://ir.dcs.gla.ac.uk/resources/linguistic_utils/stop_words}. Use the BM25 ranking model for retrieval. You are not required to tune any parameter, but are welcome to do so.
+\section{Experiment}
+For each Collection, the top $N = {20,50,100,200}$ documents were retrieved for each query. For each N, top documents were then cut based on $\sigma={0.1,0.3,0.5,0.7,0.9}$. The standard deviation and MAD was then calculated at precision at 10(P@10) and the bpref. The same thing was then done using the normalized standard deviation and MAD.
 
-Use values of $N=\{20,50,100,200\}$ and report a table similar to that of Table 2 in \cite{cummins2011improved} setting $\sigma=\{0.1,0.3,0.5,0.7,0.9\}$ and include the normalised version (see the paper). Use both Pearson's $r$ and Spearman's $\rho$, and use only the title of each query. Where is the correlation with P@10 the highest for each $N$? Where is it best overall? Why do you think that is? Repeat the above with at least one other metric (e.g.\ MRR, nDCG etc.). Which one gives you the highest correlation?
+Unfourtunatly I was not able to compare my findings with other QPP methods such as Simplified score predictions, Query scope, and $\sigma_{max}$. 
+\section{Results}
+Looking at the results in the table sections, it is hard to draw any conclusions. The best performance are not constrained to a certain part. The only tendency i can derive from the tables is, that the normalized versions tends to be a better predictor. This is true for both the LATIMES collection and the FBIS collection, but is not true for the FT collection.
 
-As the standard deviation assumes data are normally distributed (which is not case for many real-life data sets), repeat the above analysis, but instead of $\sigma$ use the \emph{mean absolute deviation}:
-\begin{equation}
-\text{MAD} = \text{median}\left(x_i - \text{median}(x)\right)
-\end{equation}
-Does MAD correlate with P@10 better than compared to using the standard deviation? Why? What is the best correlation you get? What about the normalised version of the MAD?
+Furthermore I have no other Post retrieval QPP scores to compare my findings with, which makes me unable to make any conclusions based on my numbers. My numbers are also not as strong as those found by Cummins et. al, and My numbers do not reflect their preference for $\sigma_{50\%}$
 
-Finally, produce a Table similar to Table 4 in \cite{cummins2011improved} for one of the datasets of your choosing. Use the simplified clarify score (scs), average IDF ($idf_{avg}$), query scope (qs) and $\sigma_{\max}$ predictors. 
+It can be observed that collections do not handle the normalization in the same way. The LATIMES and FBIS collections have a tendency to favour the normalized version, while the FT collection favours the standard verison. Why this happens is not concluded.
 
-The simplified clarify score \cite{he2004inferring} (scs) is given by:
-\begin{equation}
-scs(Q) = \displaystyle\sum_{w\in V}P(w\vert Q)\log_2\frac{P(w\vert Q)}{P_{\text{coll}(w)}}
-\end{equation}
-where $w$ is a word in the vocabulary $V$ of the data set or query $Q$, $P(w\vert Q)$ is the conditional probability (relative frequency or MLE estimate) of $w$ in the query $Q$ and $P_{\text{coll}}(w)$ is the probability of $w$ in the data set (the relative frequency of $w$ in $V$).
-
-The query scope \cite{he2004inferring} (qs) is given by:
-\begin{equation}
-qs(Q) = -\log(n_Q/N)
-\end{equation}
-where $\log$ denotes the natural logarithm, $n_q$ is the number of documents in the data set that contains \emph{at least} one of the query terms, and $N$ is the number of documents in the data set.
-
-Compare your best correlations with these predictors.
-
-\section{tables}
-False False la 20
-queries,150, 19.54 , 6 , 33
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for la20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3273 & 0.3379 & 0.3249 & 0.2384 & 0.0335 \\ \hline
-Spearman  & 0.4083 & 0.4138 & 0.4045 & 0.2606 & -0.0309 \\ \hline
-\end{tabular}
-\end{table}
-False False la 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for la50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.4142 & 0.4007 & 0.3591 & 0.2383 & 0.0282 \\ \hline
-Spearman  & 0.4078 & 0.4076 & 0.3914 & 0.2596 & -0.032 \\ \hline
-\end{tabular}
-\end{table}
-False False la 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for la100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.4016 & 0.382 & 0.3533 & 0.2311 & 0.0253 \\ \hline
-Spearman  & 0.3917 & 0.3917 & 0.3738 & 0.2583 & -0.0337 \\ \hline
-\end{tabular}
-\end{table}
-False False la 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for la200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3767 & 0.3708 & 0.3498 & 0.2226 & 0.0253 \\ \hline
-Spearman  & 0.357 & 0.3672 & 0.3658 & 0.2533 & -0.0337 \\ \hline
-\end{tabular}
-\end{table}
-False False ft 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for ft20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.334 & 0.3345 & 0.3055 & 0.3095 & 0.2253 \\ \hline
-Spearman  & 0.4443 & 0.444 & 0.4277 & 0.3513 & 0.1702 \\ \hline
-\end{tabular}
-\end{table}
-False False ft 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for ft50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3449 & 0.3544 & 0.3364 & 0.3057 & 0.2186 \\ \hline
-Spearman  & 0.44 & 0.4407 & 0.4401 & 0.3385 & 0.1642 \\ \hline
-\end{tabular}
-\end{table}
-False False ft 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for ft100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3328 & 0.3374 & 0.3403 & 0.3068 & 0.2171 \\ \hline
-Spearman  & 0.401 & 0.4111 & 0.4253 & 0.3285 & 0.1639 \\ \hline
-\end{tabular}
-\end{table}
-False False ft 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for ft200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3089 & 0.3261 & 0.3461 & 0.3022 & 0.2171 \\ \hline
-Spearman  & 0.3512 & 0.3678 & 0.4159 & 0.323 & 0.1639 \\ \hline
-\end{tabular}
-\end{table}
-False False fbis 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for fbis20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1911 & 0.1794 & 0.1327 & 0.0832 & 0.3151 \\ \hline
-Spearman  & 0.1307 & 0.1204 & 0.0994 & 0.0719 & 0.2911 \\ \hline
-\end{tabular}
-\end{table}
-False False fbis 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for fbis50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2144 & 0.1982 & 0.1501 & 0.1175 & 0.3172 \\ \hline
-Spearman  & 0.1817 & 0.1769 & 0.1532 & 0.119 & 0.2976 \\ \hline
-\end{tabular}
-\end{table}
-False False fbis 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for fbis100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2382 & 0.232 & 0.1837 & 0.1321 & 0.3174 \\ \hline
-Spearman  & 0.2141 & 0.21 & 0.1929 & 0.1341 & 0.2988 \\ \hline
-\end{tabular}
-\end{table}
-False False fbis 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for fbis200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2619 & 0.2783 & 0.2007 & 0.1379 & 0.3173 \\ \hline
-Spearman  & 0.2565 & 0.2629 & 0.2196 & 0.1433 & 0.2988 \\ \hline
-\end{tabular}
-\end{table}
-False True la 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADla20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3686 & 0.3734 & 0.3665 & 0.2312 & 0.1115 \\ \hline
-Spearman  & 0.3464 & 0.3464 & 0.3625 & 0.2578 & 0.0409 \\ \hline
-\end{tabular}
-\end{table}
-False True la 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADla50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3824 & 0.3698 & 0.4077 & 0.2335 & 0.1067 \\ \hline
-Spearman  & 0.2571 & 0.253 & 0.3512 & 0.2385 & 0.0393 \\ \hline
-\end{tabular}
-\end{table}
-False True la 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADla100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2708 & 0.3171 & 0.3954 & 0.2268 & 0.1042 \\ \hline
-Spearman  & 0.2192 & 0.2798 & 0.3305 & 0.2319 & 0.0368 \\ \hline
-\end{tabular}
-\end{table}
-False True la 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADla200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2762 & 0.3543 & 0.3608 & 0.2172 & 0.1042 \\ \hline
-Spearman  & 0.1418 & 0.2061 & 0.2512 & 0.2182 & 0.0368 \\ \hline
-\end{tabular}
-\end{table}
-False True ft 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADft20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2388 & 0.2277 & 0.2185 & 0.277 & 0.2452 \\ \hline
-Spearman  & 0.3025 & 0.3032 & 0.3437 & 0.32 & 0.1657 \\ \hline
-\end{tabular}
-\end{table}
-False True ft 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADft50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1693 & 0.1787 & 0.2528 & 0.2633 & 0.2411 \\ \hline
-Spearman  & 0.2317 & 0.2458 & 0.3577 & 0.2708 & 0.1622 \\ \hline
-\end{tabular}
-\end{table}
-False True ft 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADft100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.0658 & 0.1572 & 0.2635 & 0.2543 & 0.2395 \\ \hline
-Spearman  & 0.1196 & 0.1869 & 0.3527 & 0.2418 & 0.1585 \\ \hline
-\end{tabular}
-\end{table}
-False True ft 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADft200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & -0.0021 & 0.1208 & 0.2786 & 0.2491 & 0.2395 \\ \hline
-Spearman  & 0.0238 & 0.1237 & 0.3543 & 0.2232 & 0.1585 \\ \hline
-\end{tabular}
-\end{table}
-False True fbis 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADfbis20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2852 & 0.2735 & 0.2008 & 0.105 & 0.3691 \\ \hline
-Spearman  & 0.1882 & 0.1807 & 0.1583 & 0.111 & 0.335 \\ \hline
-\end{tabular}
-\end{table}
-False True fbis 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADfbis50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1314 & 0.1447 & 0.1763 & 0.1028 & 0.3706 \\ \hline
-Spearman  & 0.1871 & 0.1692 & 0.2139 & 0.0994 & 0.3439 \\ \hline
-\end{tabular}
-\end{table}
-False True fbis 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADfbis100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2276 & 0.28 & 0.2434 & 0.1127 & 0.3706 \\ \hline
-Spearman  & 0.2127 & 0.2153 & 0.2495 & 0.1019 & 0.3456 \\ \hline
-\end{tabular}
-\end{table}
-False True fbis 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADfbis200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2032 & 0.2921 & 0.2416 & 0.1049 & 0.3704 \\ \hline
-Spearman  & 0.232 & 0.2715 & 0.2545 & 0.1063 & 0.3452 \\ \hline
-\end{tabular}
-\end{table}
-True False la 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for la20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3929 & 0.4102 & 0.4072 & 0.3455 & 0.0926 \\ \hline
-Spearman  & 0.432 & 0.4369 & 0.4343 & 0.3127 & 0.0145 \\ \hline
-\end{tabular}
-\end{table}
-True False la 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for la50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.4336 & 0.4393 & 0.4207 & 0.3489 & 0.0879 \\ \hline
-Spearman  & 0.433 & 0.4339 & 0.4278 & 0.3168 & 0.0131 \\ \hline
-\end{tabular}
-\end{table}
-True False la 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for la100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.4197 & 0.431 & 0.4193 & 0.3427 & 0.0848 \\ \hline
-Spearman  & 0.4254 & 0.427 & 0.4183 & 0.3171 & 0.0097 \\ \hline
-\end{tabular}
-\end{table}
-True False la 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for la200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.391 & 0.4229 & 0.4187 & 0.337 & 0.0848 \\ \hline
-Spearman  & 0.3906 & 0.4004 & 0.4095 & 0.3134 & 0.0097 \\ \hline
-\end{tabular}
-\end{table}
-True False ft 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for ft20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2528 & 0.2544 & 0.2562 & 0.2525 & 0.1521 \\ \hline
-Spearman  & 0.4159 & 0.4159 & 0.3956 & 0.3149 & 0.1446 \\ \hline
-\end{tabular}
-\end{table}
-True False ft 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for ft50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2255 & 0.2386 & 0.2712 & 0.2359 & 0.1448 \\ \hline
-Spearman  & 0.4001 & 0.4003 & 0.393 & 0.2935 & 0.1437 \\ \hline
-\end{tabular}
-\end{table}
-True False ft 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for ft100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1924 & 0.2058 & 0.2633 & 0.2328 & 0.1428 \\ \hline
-Spearman  & 0.36 & 0.3659 & 0.3777 & 0.2877 & 0.1446 \\ \hline
-\end{tabular}
-\end{table}
-True False ft 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for ft200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1521 & 0.1869 & 0.2646 & 0.2284 & 0.1428 \\ \hline
-Spearman  & 0.3149 & 0.333 & 0.3749 & 0.2897 & 0.1446 \\ \hline
-\end{tabular}
-\end{table}
-True False fbis 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for fbis20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2217 & 0.214 & 0.1729 & 0.1134 & 0.3545 \\ \hline
-Spearman  & 0.1568 & 0.1473 & 0.1333 & 0.1325 & 0.3365 \\ \hline
-\end{tabular}
-\end{table}
-True False fbis 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for fbis50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2278 & 0.2338 & 0.2001 & 0.1483 & 0.3558 \\ \hline
-Spearman  & 0.1966 & 0.188 & 0.1802 & 0.1632 & 0.3456 \\ \hline
-\end{tabular}
-\end{table}
-True False fbis 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for fbis100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2377 & 0.2563 & 0.2299 & 0.1618 & 0.3555 \\ \hline
-Spearman  & 0.2306 & 0.2222 & 0.2203 & 0.1815 & 0.3485 \\ \hline
-\end{tabular}
-\end{table}
-True False fbis 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for fbis200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2544 & 0.2951 & 0.2458 & 0.1668 & 0.3554 \\ \hline
-Spearman  & 0.2781 & 0.2821 & 0.2492 & 0.1981 & 0.3485 \\ \hline
-\end{tabular}
-\end{table}
-True True la 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADla20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3858 & 0.3827 & 0.3604 & 0.321 & 0.1535 \\ \hline
-Spearman  & 0.3725 & 0.3715 & 0.382 & 0.2796 & 0.0468 \\ \hline
-\end{tabular}
-\end{table}
-True True la 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADla50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.3901 & 0.3737 & 0.3787 & 0.3162 & 0.1492 \\ \hline
-Spearman  & 0.297 & 0.2931 & 0.3928 & 0.2755 & 0.0462 \\ \hline
-\end{tabular}
-\end{table}
-True True la 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADla100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.288 & 0.3446 & 0.3745 & 0.3122 & 0.1467 \\ \hline
-Spearman  & 0.2441 & 0.3083 & 0.3705 & 0.2688 & 0.0423 \\ \hline
-\end{tabular}
-\end{table}
-True True la 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADla200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-la 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2759 & 0.3571 & 0.3505 & 0.3065 & 0.1467 \\ \hline
-Spearman  & 0.1881 & 0.2472 & 0.2992 & 0.2567 & 0.0423 \\ \hline
-\end{tabular}
-\end{table}
-True True ft 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADft20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1514 & 0.1466 & 0.1743 & 0.2174 & 0.1745 \\ \hline
-Spearman  & 0.2651 & 0.2662 & 0.3062 & 0.2765 & 0.153 \\ \hline
-\end{tabular}
-\end{table}
-True True ft 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADft50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.0689 & 0.0868 & 0.1781 & 0.2021 & 0.1693 \\ \hline
-Spearman  & 0.2041 & 0.2176 & 0.3239 & 0.2341 & 0.1527 \\ \hline
-\end{tabular}
-\end{table}
-True True ft 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADft100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & -0.0145 & 0.0579 & 0.174 & 0.191 & 0.1671 \\ \hline
-Spearman  & 0.1108 & 0.1691 & 0.3146 & 0.2131 & 0.1479 \\ \hline
-\end{tabular}
-\end{table}
-True True ft 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADft200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-ft 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & -0.0507 & 0.0363 & 0.1832 & 0.1875 & 0.1671 \\ \hline
-Spearman  & 0.005 & 0.097 & 0.3121 & 0.2044 & 0.1479 \\ \hline
-\end{tabular}
-\end{table}
-True True fbis 20
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADfbis20}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 20 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.2831 & 0.2798 & 0.2355 & 0.1244 & 0.3796 \\ \hline
-Spearman  & 0.2034 & 0.1948 & 0.1712 & 0.1374 & 0.3564 \\ \hline
-\end{tabular}
-\end{table}
-True True fbis 50
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADfbis50}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 50 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1679 & 0.1994 & 0.2363 & 0.1258 & 0.3803 \\ \hline
-Spearman  & 0.2106 & 0.1916 & 0.2373 & 0.1331 & 0.3687 \\ \hline
-\end{tabular}
-\end{table}
-True True fbis 100
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADfbis100}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 100 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1989 & 0.2609 & 0.2764 & 0.1323 & 0.3796 \\ \hline
-Spearman  & 0.2453 & 0.2427 & 0.2778 & 0.1477 & 0.3681 \\ \hline
-\end{tabular}
-\end{table}
-True True fbis 200
-\begin{table}[h!]
-\centering
-\caption{$\sigma_{\%}$ correlations for MADfbis200}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-fbis 200 & $\sigma_{0.1\%}$ & $\sigma_{0.3\%}$ & $\sigma_{0.5\%}$ & $\sigma_{0.7\%}$ & $\sigma_{0.9\%}$ \\ \hline
-Pearsons  & 0.1982 & 0.2932 & 0.275 & 0.1235 & 0.3794 \\ \hline
-Spearman  & 0.2519 & 0.2851 & 0.2746 & 0.1487 & 0.368 \\ \hline
-\end{tabular}
-\end{table}
-
-
-% The following two commands are all you need in the
-% initial runs of your .tex file to
-% produce the bibliography for the citations in your paper.
 \section{Conclusion}
-Write your conclusion here
+Testing if the findings done by Cummins et. al.\cite{cummins2011improved} can be reproduced using other data sets and comparing Standard deviation width Median absolute deviation, to see if it can also be used as a predictor. There is a tendency that median absolute deviation outperforms standard deviation for some collections, so it could be worth looking into when and why this happens.
+
 \bibliographystyle{abbrv}
 \bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
 % You must have a proper ".bib" file
@@ -650,8 +107,283 @@ Write your conclusion here
 % to resolve all references
 %
 %APPENDICES are optional
-%\balancecolumns
-%\appendix
-%Appendix A
+\onecolumn
+\section{tables}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3273 & 0.3379 & 0.3249 & 0.2384 & 0.0335 & 0.3779 & \textbf{0.3932} & 0.3866 & 0.3138 & 0.0633 \\ \hline
+Spearman & 0.4083 & 0.4138 & 0.4045 & 0.2606 & -0.0309 & 0.4283 & \textbf{0.4334} & 0.4279 & 0.3039 & 0.006 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.334 & \textbf{0.3345} & 0.3055 & 0.3095 & 0.2253 & 0.3108 & 0.3118 & 0.295 & 0.2963 & 0.196 \\ \hline
+Spearman & \textbf{0.4443} & 0.444 & 0.4277 & 0.3513 & 0.1702 & 0.4299 & 0.4297 & 0.4136 & 0.3394 & 0.168 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.1911 & 0.1794 & 0.1327 & 0.0832 & 0.3151 & 0.2145 & 0.2044 & 0.1579 & 0.1025 & \textbf{0.344} \\ \hline
+Spearman & 0.1307 & 0.1204 & 0.0994 & 0.0719 & 0.2911 & 0.1532 & 0.1416 & 0.1278 & 0.1082 & \textbf{0.3224} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=20 with P\_10 using SD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3686 & 0.3734 & 0.3665 & 0.2312 & 0.1115 & 0.3923 & \textbf{0.3927} & 0.3795 & 0.2971 & 0.1343 \\ \hline
+Spearman & 0.3464 & 0.3464 & 0.3625 & 0.2578 & 0.0409 & 0.3623 & 0.3625 & \textbf{0.3711} & 0.2685 & 0.0493 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2388 & 0.2277 & 0.2185 & \textbf{0.277} & 0.2452 & 0.2071 & 0.1991 & 0.2055 & 0.2561 & 0.216 \\ \hline
+Spearman & 0.3025 & 0.3032 & \textbf{0.3437} & 0.32 & 0.1657 & 0.2847 & 0.2862 & 0.3237 & 0.2948 & 0.1678 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2852 & 0.2735 & 0.2008 & 0.105 & 0.3691 & 0.2962 & 0.2891 & 0.2236 & 0.1169 & \textbf{0.3867} \\ \hline
+Spearman & 0.1882 & 0.1807 & 0.1583 & 0.111 & 0.335 & 0.1955 & 0.1869 & 0.1651 & 0.1266 & \textbf{0.3476} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=20 with P\_10 using MAD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.5051 & 0.5229 & 0.4614 & 0.2254 & 0.0955 & 0.612 & \textbf{0.6352} & 0.5838 & 0.3313 & 0.145 \\ \hline
+Spearman & 0.4437 & 0.4518 & 0.4402 & 0.2523 & -0.0256 & 0.4527 & \textbf{0.461} & 0.4541 & 0.2753 & 0.0026 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.4964 & \textbf{0.4966} & 0.4669 & 0.2518 & 0.2168 & 0.4648 & 0.4655 & 0.4472 & 0.2365 & 0.1889 \\ \hline
+Spearman & \textbf{0.5006} & 0.4998 & 0.4791 & 0.366 & 0.1712 & 0.4942 & 0.4939 & 0.4774 & 0.3696 & 0.179 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.4456 & 0.4251 & 0.3526 & 0.1316 & 0.197 & \textbf{0.5049} & 0.4854 & 0.4063 & 0.1776 & 0.2408 \\ \hline
+Spearman & 0.2012 & 0.19 & 0.1716 & 0.117 & 0.2495 & 0.2309 & 0.2186 & 0.2081 & 0.1598 & \textbf{0.2854} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=20 with bpref using SD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.528 & 0.5405 & 0.5017 & 0.315 & 0.1557 & 0.5941 & \textbf{0.5998} & 0.5607 & 0.4058 & 0.1889 \\ \hline
+Spearman & 0.4262 & 0.4275 & 0.4151 & 0.2603 & 0.0594 & 0.4331 & \textbf{0.4339} & 0.4146 & 0.261 & 0.0654 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & \textbf{0.4092} & 0.3982 & 0.3785 & 0.3002 & 0.2105 & 0.3577 & 0.351 & 0.3607 & 0.2789 & 0.1921 \\ \hline
+Spearman & 0.3671 & 0.3681 & \textbf{0.4055} & 0.362 & 0.16 & 0.3588 & 0.3606 & 0.3957 & 0.3542 & 0.1648 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.4142 & 0.3827 & 0.2909 & 0.1496 & 0.2811 & \textbf{0.4713} & 0.4436 & 0.3425 & 0.1881 & 0.3168 \\ \hline
+Spearman & 0.1823 & 0.1744 & 0.1936 & 0.1593 & 0.2885 & 0.197 & 0.188 & 0.2094 & 0.1822 & \textbf{0.3049} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=20 with bpref using MAD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.4142 & 0.4007 & 0.3591 & 0.2383 & 0.0282 & \textbf{0.4517} & 0.4488 & 0.4157 & 0.3186 & 0.058 \\ \hline
+Spearman & 0.4078 & 0.4076 & 0.3914 & 0.2596 & -0.032 & 0.4303 & \textbf{0.4347} & 0.4281 & 0.3147 & 0.0058 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3449 & \textbf{0.3544} & 0.3364 & 0.3057 & 0.2186 & 0.3055 & 0.3177 & 0.3231 & 0.2884 & 0.1888 \\ \hline
+Spearman & 0.44 & \textbf{0.4407} & 0.4401 & 0.3385 & 0.1642 & 0.4282 & 0.4294 & 0.4229 & 0.3259 & 0.1663 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2144 & 0.1982 & 0.1501 & 0.1175 & 0.3172 & 0.2348 & 0.2299 & 0.1826 & 0.1405 & \textbf{0.3459} \\ \hline
+Spearman & 0.1817 & 0.1769 & 0.1532 & 0.119 & 0.2976 & 0.1927 & 0.183 & 0.1695 & 0.1516 & \textbf{0.3308} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=50 with P\_10 using SD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3824 & 0.3698 & 0.4077 & 0.2335 & 0.1067 & 0.4113 & 0.398 & \textbf{0.4147} & 0.2972 & 0.1295 \\ \hline
+Spearman & 0.2571 & 0.253 & 0.3512 & 0.2385 & 0.0393 & 0.283 & 0.2821 & \textbf{0.3833} & 0.2563 & 0.0486 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.1693 & 0.1787 & 0.2528 & \textbf{0.2633} & 0.2411 & 0.1188 & 0.1369 & 0.2258 & 0.2417 & 0.2113 \\ \hline
+Spearman & 0.2317 & 0.2458 & \textbf{0.3577} & 0.2708 & 0.1622 & 0.2135 & 0.2293 & 0.338 & 0.2536 & 0.1675 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.1314 & 0.1447 & 0.1763 & 0.1028 & 0.3706 & 0.1608 & 0.1857 & 0.213 & 0.1167 & \textbf{0.3879} \\ \hline
+Spearman & 0.1871 & 0.1692 & 0.2139 & 0.0994 & 0.3439 & 0.2046 & 0.1828 & 0.2288 & 0.1218 & \textbf{0.3585} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=50 with P\_10 using MAD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.5299 & 0.5325 & 0.4553 & 0.2474 & 0.0954 & 0.6207 & \textbf{0.6362} & 0.5728 & 0.3594 & 0.1464 \\ \hline
+Spearman & 0.4326 & 0.4424 & 0.4156 & 0.2595 & 0.0018 & 0.4555 & \textbf{0.4697} & 0.4554 & 0.3112 & 0.0534 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.463 & \textbf{0.464} & 0.4169 & 0.2197 & 0.2331 & 0.4167 & 0.4224 & 0.401 & 0.2065 & 0.2074 \\ \hline
+Spearman & \textbf{0.4639} & 0.4639 & 0.4469 & 0.3295 & 0.1955 & 0.4499 & 0.4497 & 0.4331 & 0.3266 & 0.2019 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3746 & 0.3603 & 0.3145 & 0.1728 & 0.2613 & 0.4045 & \textbf{0.4081} & 0.3621 & 0.2042 & 0.2963 \\ \hline
+Spearman & 0.2297 & 0.2255 & 0.2078 & 0.1574 & 0.266 & 0.2467 & 0.2374 & 0.2306 & 0.1901 & \textbf{0.3036} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=50 with bpref using SD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3945 & 0.3794 & 0.4825 & 0.2958 & 0.165 & 0.4727 & 0.4606 & \textbf{0.5476} & 0.3905 & 0.2001 \\ \hline
+Spearman & 0.2542 & 0.2508 & 0.3366 & 0.235 & 0.0789 & 0.2845 & 0.2857 & \textbf{0.374} & 0.2545 & 0.0982 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2755 & 0.2888 & \textbf{0.3342} & 0.2627 & 0.2163 & 0.2146 & 0.2398 & 0.3158 & 0.2474 & 0.1972 \\ \hline
+Spearman & 0.2938 & 0.3032 & \textbf{0.3981} & 0.2854 & 0.1642 & 0.2803 & 0.2921 & 0.3845 & 0.2786 & 0.171 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2381 & 0.2339 & 0.2824 & 0.1626 & 0.3082 & 0.2846 & 0.2955 & 0.3296 & 0.1878 & \textbf{0.331} \\ \hline
+Spearman & 0.1929 & 0.1717 & 0.2283 & 0.1621 & 0.3025 & 0.2162 & 0.1917 & 0.2564 & 0.1868 & \textbf{0.3206} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=50 with bpref using MAD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.4016 & 0.382 & 0.3533 & 0.2311 & 0.0253 & \textbf{0.4409} & 0.4376 & 0.4138 & 0.3132 & 0.0548 \\ \hline
+Spearman & 0.3917 & 0.3917 & 0.3738 & 0.2583 & -0.0337 & 0.4236 & \textbf{0.4285} & 0.4199 & 0.3055 & 0.0039 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3328 & 0.3374 & \textbf{0.3403} & 0.3068 & 0.2171 & 0.2785 & 0.2904 & 0.3231 & 0.2883 & 0.187 \\ \hline
+Spearman & 0.401 & 0.4111 & \textbf{0.4253} & 0.3285 & 0.1639 & 0.381 & 0.3881 & 0.4079 & 0.3194 & 0.1669 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2382 & 0.232 & 0.1837 & 0.1321 & 0.3174 & 0.2532 & 0.2605 & 0.2166 & 0.1562 & \textbf{0.346} \\ \hline
+Spearman & 0.2141 & 0.21 & 0.1929 & 0.1341 & 0.2988 & 0.2314 & 0.2272 & 0.2189 & 0.1736 & \textbf{0.3332} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=100 with P\_10 using SD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2708 & 0.3171 & 0.3954 & 0.2268 & 0.1042 & 0.2944 & 0.3511 & \textbf{0.4062} & 0.2923 & 0.127 \\ \hline
+Spearman & 0.2192 & 0.2798 & 0.3305 & 0.2319 & 0.0368 & 0.236 & 0.3011 & \textbf{0.3656} & 0.2506 & 0.046 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.0658 & 0.1572 & \textbf{0.2635} & 0.2543 & 0.2395 & 0.0182 & 0.1084 & 0.2292 & 0.2313 & 0.2094 \\ \hline
+Spearman & 0.1196 & 0.1869 & \textbf{0.3527} & 0.2418 & 0.1585 & 0.1184 & 0.1808 & 0.3379 & 0.2303 & 0.1639 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2276 & 0.28 & 0.2434 & 0.1127 & 0.3706 & 0.2191 & 0.2824 & 0.2673 & 0.1252 & \textbf{0.3877} \\ \hline
+Spearman & 0.2127 & 0.2153 & 0.2495 & 0.1019 & 0.3456 & 0.2277 & 0.2273 & 0.2661 & 0.1333 & \textbf{0.3597} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=100 with P\_10 using MAD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.485 & 0.4731 & 0.4151 & 0.2416 & 0.0928 & 0.574 & \textbf{0.5825} & 0.532 & 0.3513 & 0.1396 \\ \hline
+Spearman & 0.4167 & 0.4264 & 0.39 & 0.2508 & 0.0147 & 0.4481 & \textbf{0.463} & 0.4399 & 0.3019 & 0.0673 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.4026 & \textbf{0.4048} & 0.3739 & 0.1979 & 0.2535 & 0.3465 & 0.3587 & 0.3576 & 0.1862 & 0.2305 \\ \hline
+Spearman & 0.4035 & \textbf{0.4139} & 0.3974 & 0.2951 & 0.2121 & 0.3879 & 0.3928 & 0.3826 & 0.2939 & 0.2179 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.352 & 0.349 & 0.3188 & 0.181 & 0.2906 & 0.3674 & \textbf{0.3832} & 0.3576 & 0.2053 & 0.3212 \\ \hline
+Spearman & 0.2365 & 0.234 & 0.2305 & 0.1703 & 0.2727 & 0.2588 & 0.2566 & 0.258 & 0.206 & \textbf{0.3126} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=100 with bpref using SD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3611 & 0.3586 & 0.4477 & 0.2814 & 0.1698 & 0.421 & 0.4333 & \textbf{0.5097} & 0.3734 & 0.2012 \\ \hline
+Spearman & 0.2958 & 0.3305 & 0.3531 & 0.2266 & 0.0962 & 0.3158 & 0.358 & \textbf{0.389} & 0.2508 & 0.1157 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.0496 & 0.256 & \textbf{0.3096} & 0.2316 & 0.2374 & 0.0185 & 0.2044 & 0.287 & 0.2176 & 0.2207 \\ \hline
+Spearman & 0.1353 & 0.2288 & \textbf{0.3827} & 0.2447 & 0.1757 & 0.1367 & 0.2274 & 0.3691 & 0.2426 & 0.1832 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3165 & 0.3442 & 0.3456 & 0.1715 & 0.3161 & 0.3096 & 0.3511 & \textbf{0.3694} & 0.1894 & 0.3332 \\ \hline
+Spearman & 0.2295 & 0.22 & 0.2622 & 0.1671 & 0.308 & 0.2508 & 0.2403 & 0.286 & 0.1992 & \textbf{0.3263} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=100 with bpref using MAD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3767 & 0.3708 & 0.3498 & 0.2226 & 0.0253 & 0.4146 & \textbf{0.4296} & 0.4139 & 0.3067 & 0.0548 \\ \hline
+Spearman & 0.357 & 0.3672 & 0.3658 & 0.2533 & -0.0337 & 0.3834 & \textbf{0.4036} & 0.4036 & 0.303 & 0.0039 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3089 & 0.3261 & \textbf{0.3461} & 0.3022 & 0.2171 & 0.2412 & 0.2741 & 0.3276 & 0.2843 & 0.187 \\ \hline
+Spearman & 0.3512 & 0.3678 & \textbf{0.4159} & 0.323 & 0.1639 & 0.3374 & 0.3537 & 0.3997 & 0.3202 & 0.1669 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2619 & 0.2783 & 0.2007 & 0.1379 & 0.3173 & 0.2757 & 0.3071 & 0.2348 & 0.1626 & \textbf{0.3459} \\ \hline
+Spearman & 0.2565 & 0.2629 & 0.2196 & 0.1433 & 0.2988 & 0.2692 & 0.2705 & 0.244 & 0.1841 & \textbf{0.3332} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=200 with P\_10 using SD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2762 & 0.3543 & 0.3608 & 0.2172 & 0.1042 & 0.2911 & \textbf{0.3805} & 0.3761 & 0.2846 & 0.127 \\ \hline
+Spearman & 0.1418 & 0.2061 & 0.2512 & 0.2182 & 0.0368 & 0.1692 & 0.2349 & \textbf{0.2896} & 0.2385 & 0.046 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & -0.0021 & 0.1208 & \textbf{0.2786} & 0.2491 & 0.2395 & -0.0335 & 0.0785 & 0.242 & 0.227 & 0.2094 \\ \hline
+Spearman & 0.0238 & 0.1237 & \textbf{0.3543} & 0.2232 & 0.1585 & 0.0158 & 0.1125 & 0.3395 & 0.2185 & 0.1639 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2032 & 0.2921 & 0.2416 & 0.1049 & 0.3704 & 0.209 & 0.3091 & 0.2663 & 0.1166 & \textbf{0.3875} \\ \hline
+Spearman & 0.232 & 0.2715 & 0.2545 & 0.1063 & 0.3452 & 0.2417 & 0.2778 & 0.2727 & 0.1356 & \textbf{0.3594} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=200 with P\_10 using MAD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.4457 & 0.4413 & 0.3906 & 0.2264 & 0.0946 & 0.5306 & \textbf{0.5504} & 0.5075 & 0.3332 & 0.1385 \\ \hline
+Spearman & 0.3856 & 0.4026 & 0.3582 & 0.222 & 0.0185 & 0.4155 & \textbf{0.4431} & 0.4106 & 0.2755 & 0.0704 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3345 & \textbf{0.362} & 0.3358 & 0.1837 & 0.2535 & 0.2735 & 0.3194 & 0.3219 & 0.1758 & 0.2353 \\ \hline
+Spearman & 0.3583 & \textbf{0.3698} & 0.363 & 0.2757 & 0.2123 & 0.3437 & 0.3555 & 0.3473 & 0.2776 & 0.2173 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3467 & 0.3582 & 0.2943 & 0.175 & 0.2861 & 0.3624 & \textbf{0.3928} & 0.3341 & 0.1992 & 0.317 \\ \hline
+Spearman & 0.2637 & 0.2733 & 0.2408 & 0.1712 & 0.2646 & 0.2886 & 0.2948 & 0.276 & 0.2123 & \textbf{0.3049} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=200 with bpref using SD}
+\end{table}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l||l|l|l|l|l||l|l|l|l|l|}
+\hline
+& $\sigma_{10\%}$ & $\sigma_{30\%}$ & $\sigma_{50\%}$ & $\sigma_{70\%}$ & $\sigma_{90\%}$ & n($\sigma_{10\%})$ & n($\sigma_{30\%})$ & n($\sigma_{50\%})$ & n($\sigma_{70\%})$ & n($\sigma_{90\%}$) \\ \hline
+\hline la &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.3429 & 0.3698 & 0.4031 & 0.2532 & 0.1719 & 0.3907 & 0.435 & \textbf{0.4662} & 0.3432 & 0.2012 \\ \hline
+Spearman & 0.2254 & 0.258 & 0.2535 & 0.1898 & 0.1048 & 0.2646 & 0.3009 & \textbf{0.3038} & 0.2162 & 0.124 \\ \hline
+\hline ft &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.0095 & 0.2267 & \textbf{0.2844} & 0.203 & 0.2419 & -0.012 & 0.1824 & 0.2629 & 0.1931 & 0.2294 \\ \hline
+Spearman & 0.0775 & 0.1894 & \textbf{0.3691} & 0.2078 & 0.1811 & 0.0756 & 0.1866 & 0.3586 & 0.2128 & 0.1893 \\ \hline
+\hline fbis &  &  &  &  &  &  &  &  &  &  \\ \hline
+Pearsons & 0.2975 & 0.3374 & 0.3256 & 0.1549 & 0.3136 & 0.3063 & \textbf{0.3589} & 0.3502 & 0.1722 & 0.3297 \\ \hline
+Spearman & 0.2588 & 0.2833 & 0.263 & 0.1657 & 0.3076 & 0.2766 & 0.3002 & 0.2884 & 0.1967 & \textbf{0.3264} \\ \hline
+\end{tabular}
+\caption{$\sigma_{\%}$ correlations for k=200 with bpref using MAD}
+\end{table}
+
+
+
 %\balancecolumns % GM June 2007
 \end{document}

@@ -7,4 +7,23 @@ R.~Cummins, J.~Jose, and C.~O'Riordan.
   Research and development in Information Retrieval}, pages 1089--1090. ACM,
   2011.
 
+\bibitem{review1}
+C.~Hauff and L.~Azzopardi.
+\newblock When is query performance prediction effective?
+\newblock In {\em Proceedings of the 32th international ACM SIGIR conference on
+  Research and development in Information Retrieval}, pages 829--830. ACM,
+  2009.
+
+\bibitem{review3}
+J.~Pérez-Iglesias and L.~Araujo.
+\newblock A survey of pre-retrieval query performance predictors.
+\newblock In {\em Proceedings of the 17th ACM conference on Information and
+  knowledge management}, pages 1419--1420. ACM, 2008.
+
+\bibitem{review2}
+J.~Pérez-Iglesias and L.~Araujo.
+\newblock Standard deviation as a query hardness estimator.
+\newblock In {\em SPIRE'10 Proceedings of the 17th international conference on
+  String processing and information retrievall}, pages 207--212. ACM, 2010.
+
 \end{thebibliography}
